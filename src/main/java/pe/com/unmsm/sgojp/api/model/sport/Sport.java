@@ -20,9 +20,12 @@ public class Sport {
 
     private String id;
     private String name;
+    private String place;
     private String description;
     private String history;
-    private String url_image;
+    private String url_image_1;
+    private String url_image_2;
+    private String url_image_3;
     private List<Event> events;
 
 }

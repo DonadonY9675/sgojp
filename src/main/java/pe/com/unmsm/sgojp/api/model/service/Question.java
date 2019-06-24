@@ -5,6 +5,7 @@
  */
 package pe.com.unmsm.sgojp.api.model.service;
 
+import java.util.List;
 import java.util.Map;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,7 +20,6 @@ public class Question {
 
     private String id;
     private String question;
-    private String rating;
-    private String rating_total;
-    private Map<String, Object> tests;
+    private List place;
+    private Map<String, Boolean> ratings;
 }

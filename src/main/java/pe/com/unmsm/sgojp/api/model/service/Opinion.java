@@ -5,9 +5,9 @@
  */
 package pe.com.unmsm.sgojp.api.model.service;
 
+import java.util.Map;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.bson.types.ObjectId;
 
 /**
  *
@@ -18,8 +18,8 @@ import org.bson.types.ObjectId;
 public class Opinion {
     private String id;
     private String user_id;
+    private String place;
     private String comment;
     private String date;
-    private String likes;
-    private String dislikes;
+    private Map<String,Boolean> likes;
 }

@@ -6,6 +6,7 @@
 package pe.com.unmsm.sgojp.api.model.sport;
 
 import java.util.List;
+import java.util.Map;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -20,8 +21,7 @@ public class Event {
     private String id;
     private String name;
     private String description;
-    private String rating;
-    private String count_rating;
+    private Map<String,Boolean> rating;
     private List<Comment> comments;
 
 }

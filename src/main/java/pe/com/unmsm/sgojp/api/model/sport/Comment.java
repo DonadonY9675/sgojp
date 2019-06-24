@@ -5,6 +5,8 @@
  */
 package pe.com.unmsm.sgojp.api.model.sport;
 
+import java.sql.Date;
+import java.util.Map;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -17,8 +19,8 @@ import lombok.NoArgsConstructor;
 public class Comment {
 
     private String id;
+    private String user_id;
     private String comment;
-    private String likes;
-    private String dislikes;
-
+    private Date date;
+    private Map<String, Boolean> likes;
 }
