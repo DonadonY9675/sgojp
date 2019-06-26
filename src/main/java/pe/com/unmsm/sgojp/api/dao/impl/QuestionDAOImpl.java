@@ -6,12 +6,13 @@ package pe.com.unmsm.sgojp.api.dao.impl;
  * and open the template in the editor.
  */
 import com.mongodb.BasicDBObject;
-import com.mongodb.BasicDBObjectBuilder;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import static com.mongodb.client.model.Filters.eq;
 import java.util.ArrayList;
 import java.util.List;
+import org.bson.Document;
 import pe.com.unmsm.sgojp.api.dao.QuestionDAO;
 import static pe.com.unmsm.sgojp.api.dao.Connection.getConnection;
 import pe.com.unmsm.sgojp.api.model.service.Question;
@@ -32,7 +33,10 @@ public class QuestionDAOImpl implements QuestionDAO {
 
     @Override
     public boolean update(Question e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        MongoCollection<Question> collection = DATABASE.getCollection(TABLE_NAME, Question.class);
+        
+        collection.updateMany(eq("_id",e.getId()), new Document("$set", new Document("ratings", e.getRatings())));
+        return false;
     }
 
     @Override

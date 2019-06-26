@@ -5,7 +5,7 @@
  */
 package pe.com.unmsm.sgojp.api.model;
 
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,8 +19,8 @@ import lombok.NoArgsConstructor;
 public class User {
 
     private String id;
-//    private String place;
-    private String date;
+ //   private String place;
+    private Date date;
     private String section;
     private List sport_ids;
 }

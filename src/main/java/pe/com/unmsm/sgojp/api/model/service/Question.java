@@ -21,5 +21,5 @@ public class Question {
     private String id;
     private String question;
     private List place;
-    private Map<String, Boolean> ratings;
+    private Map<String, Integer> ratings;
 }
