@@ -20,6 +20,11 @@ public class OpinionServiceImpl implements OpinionService {
     private OpinionDAO u = new OpinionDAOImpl();
 
     @Override
+    public boolean register(Opinion e) {
+        return u.register(e);
+    }
+
+    @Override
     public Opinion get(String id) {
         return u.get(id);
     }
@@ -27,6 +32,16 @@ public class OpinionServiceImpl implements OpinionService {
     @Override
     public List<Opinion> getAll() {
         return u.getAll();
+    }
+
+    @Override
+    public boolean update(Opinion e) {
+        return u.update(e);
+    }
+
+    @Override
+    public boolean remove(String id) {
+        return u.remove(id);
     }
 
 }

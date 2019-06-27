@@ -37,5 +37,5 @@ public class UserControllerImpl {
     public Response getCliente(@PathParam("code") String code) {
         return Response.ok(u.get(code)).build();
     }
-  
+    
 }

@@ -40,7 +40,7 @@ public class UserDAOImpl implements UserDAO {
         User user = null;
         MongoCollection<User> collection = DATABASE.getCollection(TABLE_NAME, User.class);
 
-        MongoCursor<User> cursor = collection.find(new BasicDBObject("code", id)).iterator();
+        MongoCursor<User> cursor = collection.find(new BasicDBObject("_id", id)).iterator();
         try {
             while (cursor.hasNext()) {
                 user = cursor.next();

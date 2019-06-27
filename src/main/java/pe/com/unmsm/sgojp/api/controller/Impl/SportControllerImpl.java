@@ -24,14 +24,14 @@ public class SportControllerImpl {
   
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getClientes() {
+    public Response getSport() {
         return Response.ok(u.getAll()).build();
     }
     
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getCliente(@PathParam("id") String id) {
+    public Response getSports(@PathParam("id") String id) {
         return Response.ok(u.get(id)).build();
     }
 }

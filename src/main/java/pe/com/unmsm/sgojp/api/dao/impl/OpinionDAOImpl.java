@@ -11,6 +11,8 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.bson.conversions.Bson;
@@ -45,20 +47,19 @@ public class OpinionDAOImpl implements OpinionDAO {
     @Override
     public boolean update(Opinion e) {
         MongoCollection<Opinion> collection = DATABASE.getCollection(COLLECTION_NAME, Opinion.class);
-        ObjectMapper oMapper = new ObjectMapper();
-        BasicDBObject a = new BasicDBObject("id",e.getId());
-        a.put("comment","eeeeeeeeeee");
-        collection.updateMany(new BasicDBObject("_id", e.getId()),a );
+        BasicDBObject newDocument = new BasicDBObject();
+        newDocument.append("$set", e);
+        BasicDBObject filter = new BasicDBObject("_id", e.getId());
+        return collection.updateMany(filter, newDocument).isModifiedCountAvailable();
 
-        return true;
     }
 
     @Override
     public Opinion get(String id) {
+        System.out.println("llego al dao");
         Opinion user = null;
         MongoCollection<Opinion> collection = DATABASE.getCollection(COLLECTION_NAME, Opinion.class);
-
-        MongoCursor<Opinion> cursor = collection.find(new BasicDBObject("id", id)).iterator();
+        MongoCursor<Opinion> cursor = collection.find(new BasicDBObject("_id", id)).iterator();
         try {
             while (cursor.hasNext()) {
                 user = cursor.next();
@@ -87,19 +88,22 @@ public class OpinionDAOImpl implements OpinionDAO {
 
     @Override
     public boolean remove(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        MongoCollection<Opinion> collection = DATABASE.getCollection(COLLECTION_NAME, Opinion.class);
+        return collection.deleteOne(new BasicDBObject().append("_id", id)).getDeletedCount()!=0;
     }
 
     public static void main(String[] args) {
         OpinionDAOImpl od = new OpinionDAOImpl();
         Opinion op = new Opinion();
-        op.setId("1");
-        op.setUser_id("1");
-        op.setComment("22221");
-        op.setDate("2019-11-11");
-
-//        od.register(op);
-        od.update(op);
+        op.setId("6");
+        op.setUser_id("BB01");
+        op.setComment("Malo");
+        op.setPlace("lima");
+        op.setDate(new Date(119, 1, 1));
+        Map<String, Boolean> map = new HashMap<>();
+        map.put("B666", true);
+        op.setLikes(map);
+        od.remove("6");
     }
 
 }

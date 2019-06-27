@@ -13,7 +13,14 @@ import pe.com.unmsm.sgojp.api.model.service.Opinion;
  * @author Miguel
  */
 public interface OpinionService {
+
+    public boolean register(Opinion e);
+
     public Opinion get(String id);
+
     public List<Opinion> getAll();
 
+    public boolean update(Opinion e);
+
+    public boolean remove(String id);
 }

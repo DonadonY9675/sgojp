@@ -21,7 +21,7 @@ public class Event {
     private String id;
     private String name;
     private String description;
-    private Map<String,Boolean> rating;
+    private Map<String,Integer> rating;
     private List<Comment> comments;
 
 }

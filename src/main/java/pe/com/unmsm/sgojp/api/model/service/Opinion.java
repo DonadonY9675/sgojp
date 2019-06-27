@@ -5,6 +5,7 @@
  */
 package pe.com.unmsm.sgojp.api.model.service;
 
+import java.util.Date;
 import java.util.Map;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,6 +21,6 @@ public class Opinion {
     private String user_id;
     private String place;
     private String comment;
-    private String date;
+    private Date date;
     private Map<String,Boolean> likes;
 }
