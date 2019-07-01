@@ -15,6 +15,8 @@ import pe.com.unmsm.sgojp.api.model.sport.Sport;
 public interface SportService {
 
     public Sport get(String id);
+    
+    public boolean update(Sport sport);
 
     public List<Sport> getAll();
 

@@ -32,7 +32,11 @@ public class SportDAOImpl implements SportDAO {
 
     @Override
     public boolean update(Sport e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        MongoCollection<Sport> collection = DATABASE.getCollection(TABLE_NAME, Sport.class);
+        BasicDBObject newDocument = new BasicDBObject();
+        newDocument.append("$set", e);
+        BasicDBObject filter = new BasicDBObject("_id", e.getId());
+        return collection.updateMany(filter, newDocument).getModifiedCount()>0;
     }
 
     @Override

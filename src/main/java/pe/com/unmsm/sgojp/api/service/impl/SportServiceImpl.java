@@ -34,6 +34,11 @@ public class SportServiceImpl implements SportService {
     }
 
     @Override
+    public boolean update(Sport sport) {
+        return sportDao.update(sport);
+    }
+    
+    @Override
     public List<Sport> getSportFilterCode(String code) {
         User user = usersDao.get(code);
         List<Sport> lsSport = sportDao.getAll();
@@ -52,5 +57,7 @@ public class SportServiceImpl implements SportService {
             return null;
         }
     }
+
+    
 
 }
