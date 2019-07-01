@@ -40,7 +40,7 @@ public class PlaceDAOImpl implements PlaceDAO {
         Place user = null;
         MongoCollection<Place> collection = DATABASE.getCollection(TABLE_NAME, Place.class);
 
-        MongoCursor<Place> cursor = collection.find(new BasicDBObject("code", id)).iterator();
+        MongoCursor<Place> cursor = collection.find(new BasicDBObject("_id", id)).iterator();
         try {
             while (cursor.hasNext()) {
                 user = cursor.next();

@@ -25,16 +25,30 @@ public class QuestionControllerImpl {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getClientes() {
+    public Response getQuestions() {
         return Response.ok(u.getAll()).build();
     }
 
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getCliente(@PathParam("id") String code) {
+    public Response getQuestion(@PathParam("id") String code) {
         return Response.ok(u.get(code)).build();
     }
     
+    @GET
+    @Path("/filter/code/{code}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getQuestionFilterCode(@PathParam("code") String code) {
+        System.out.println("filtrando code: " + code);
+        return Response.ok(u.getQuestionFilterCode(code)).build();
+    }
     
+    @GET
+    @Path("/registerRating/code/{code}/idQuestion/{idQuestion}/rating/{rating}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getQuestionFilterCode(@PathParam("code") String code, @PathParam("idQuestion") String idQuestion, @PathParam("rating") Integer rating) {
+        System.out.println("REGISTRANDO QUESTION");
+        return Response.ok(u.getQuestionRegisterRating(code,idQuestion,rating)).build();
+    }
 }

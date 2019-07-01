@@ -25,7 +25,7 @@ public class Sport {
     private String history;
     private String url_image_1;
     private String url_image_2;
-    private String url_image_3;
+//    private String url_image_3;
     private List<Event> events;
 
 }

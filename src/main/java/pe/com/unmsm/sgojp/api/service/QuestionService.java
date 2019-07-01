@@ -12,8 +12,9 @@ import pe.com.unmsm.sgojp.api.model.service.Question;
  *
  * @author Miguel
  */
-public interface QuestionService {
-    public Question get(String id);
-    public List<Question> getAll();
+public interface QuestionService extends AbstractService<String, Question> {
 
+    public List<Question> getQuestionFilterCode(String code);
+
+    public Boolean getQuestionRegisterRating(String code, String idQuestion, Integer rating);
 }

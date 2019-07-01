@@ -19,6 +19,7 @@ import pe.com.unmsm.sgojp.api.model.service.Question;
 
 /**
  *
+ *
  * @author Miguel
  */
 public class QuestionDAOImpl implements QuestionDAO {
@@ -33,10 +34,15 @@ public class QuestionDAOImpl implements QuestionDAO {
 
     @Override
     public boolean update(Question e) {
-        MongoCollection<Question> collection = DATABASE.getCollection(TABLE_NAME, Question.class);
-        
-        collection.updateMany(eq("_id",e.getId()), new Document("$set", new Document("ratings", e.getRatings())));
-        return false;
+        try {
+            MongoCollection<Question> collection = DATABASE.getCollection(TABLE_NAME, Question.class);
+            System.out.println("UPDATE QUESTION: " + e);
+            collection.updateMany(eq("_id", e.getId()), new Document("$set", new Document("ratings", e.getRatings())));
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
     }
 
     @Override
@@ -44,7 +50,7 @@ public class QuestionDAOImpl implements QuestionDAO {
         Question user = null;
         MongoCollection<Question> collection = DATABASE.getCollection(TABLE_NAME, Question.class);
 
-        MongoCursor<Question> cursor = collection.find(new BasicDBObject("code", id)).iterator();
+        MongoCursor<Question> cursor = collection.find(new BasicDBObject("_id", id)).iterator();
         try {
             while (cursor.hasNext()) {
                 user = cursor.next();
