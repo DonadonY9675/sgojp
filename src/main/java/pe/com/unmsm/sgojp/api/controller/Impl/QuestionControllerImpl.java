@@ -35,5 +35,6 @@ public class QuestionControllerImpl {
     public Response getCliente(@PathParam("id") String code) {
         return Response.ok(u.get(code)).build();
     }
-
+    
+    
 }

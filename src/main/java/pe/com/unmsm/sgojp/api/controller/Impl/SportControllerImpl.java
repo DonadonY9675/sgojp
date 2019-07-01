@@ -34,4 +34,10 @@ public class SportControllerImpl {
     public Response getSports(@PathParam("id") String id) {
         return Response.ok(u.get(id)).build();
     }
+    @GET
+    @Path("/filter/code/{code}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getSportsFilterCode(@PathParam("code") String code) {
+        return Response.ok(u.getSportFilterCode(code)).build();
+    }
 }

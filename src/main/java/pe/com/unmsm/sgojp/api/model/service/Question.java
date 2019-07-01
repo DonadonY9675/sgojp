@@ -20,6 +20,7 @@ public class Question {
 
     private String id;
     private String question;
-    private List place;
+    private List<String> place;
     private Map<String, Integer> ratings;
+    private Integer value;
 }

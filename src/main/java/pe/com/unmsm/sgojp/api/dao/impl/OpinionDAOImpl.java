@@ -37,11 +37,15 @@ public class OpinionDAOImpl implements OpinionDAO {
 
     @Override
     public boolean register(Opinion e) {
-        MongoCollection<Opinion> collection = DATABASE.getCollection(COLLECTION_NAME, Opinion.class);
-        ObjectMapper oMapper = new ObjectMapper();
-        BasicDBObject doc = new BasicDBObject(oMapper.convertValue(e, Map.class));
-        collection.insertOne(e);
-        return true;
+        try {
+            MongoCollection<Opinion> collection = DATABASE.getCollection(COLLECTION_NAME, Opinion.class);
+            ObjectMapper oMapper = new ObjectMapper();
+            BasicDBObject doc = new BasicDBObject(oMapper.convertValue(e, Map.class));
+            collection.insertOne(e);
+            return true;
+        } catch (Exception ex) {
+            return false;
+        }
     }
 
     @Override
@@ -50,7 +54,7 @@ public class OpinionDAOImpl implements OpinionDAO {
         BasicDBObject newDocument = new BasicDBObject();
         newDocument.append("$set", e);
         BasicDBObject filter = new BasicDBObject("_id", e.getId());
-        return collection.updateMany(filter, newDocument).isModifiedCountAvailable();
+        return collection.updateMany(filter, newDocument).getModifiedCount()>0;
 
     }
 
@@ -89,7 +93,7 @@ public class OpinionDAOImpl implements OpinionDAO {
     @Override
     public boolean remove(String id) {
         MongoCollection<Opinion> collection = DATABASE.getCollection(COLLECTION_NAME, Opinion.class);
-        return collection.deleteOne(new BasicDBObject().append("_id", id)).getDeletedCount()!=0;
+        return collection.deleteOne(new BasicDBObject().append("_id", id)).getDeletedCount() > 0;
     }
 
     public static void main(String[] args) {

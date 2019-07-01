@@ -13,7 +13,11 @@ import pe.com.unmsm.sgojp.api.model.sport.Sport;
  * @author Miguel
  */
 public interface SportService {
+
     public Sport get(String id);
+
     public List<Sport> getAll();
+
+    public List<Sport> getSportFilterCode(String code);
 
 }
