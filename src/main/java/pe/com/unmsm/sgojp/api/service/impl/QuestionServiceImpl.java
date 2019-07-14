@@ -37,12 +37,17 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public Question get(String id) {
-        return u.get(id);
+        Question aux = u.get(id);
+        aux.setId(id);
+        return aux;
     }
 
     @Override
     public List<Question> getAll() {
-        return u.getAll();
+        List<Question> aux = u.getAll();
+        aux.forEach(e->e.setValue(-1));
+        System.out.println("RETORNANDO:" + u.getAll());
+        return aux;
     }
 
     @Override
@@ -50,9 +55,8 @@ public class QuestionServiceImpl implements QuestionService {
         List<Question> lsQuestions = u.getAll();
         System.out.println("getQuestionFilterCode= " + code);
         lsQuestions.forEach(q -> {
-            q.setValue(q.getRatings().get(code));
-            System.out.println();
-        });
+            q.setValue((q.getRatings().get(code)!=null)?q.getRatings().get(code):-1);
+        });             
         lsQuestions.forEach(q -> q.setRatings(null));
         return lsQuestions;
     }
