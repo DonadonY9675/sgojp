@@ -5,6 +5,7 @@ package pe.com.unmsm.sgojp.api.controller.Impl;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import java.util.HashMap;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -63,6 +64,22 @@ public class OpinionControllerImpl {
     public Response removeOpinion(@PathParam("id") String id) {
         System.out.println("REMOVE");
         return Response.ok(u.remove(id)).build();
+    }
+
+    @GET
+    @Path("/likes/id/{code}/user/{user}/value/{value}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getQuestionFilterCode(@PathParam("code") String code,
+             @PathParam("user") String user,
+             @PathParam("value") Boolean value) {
+            System.out.println("code = " + code + ", value = " + value + ", user= "+user);
+        Opinion opinion = u.get(code);
+        if (opinion.getLikes() == null) {
+            opinion.setLikes(new HashMap<>());
+        }
+        opinion.getLikes().put(user, value);
+        return Response.ok(u.update(opinion)).build();
+
     }
 
 }
