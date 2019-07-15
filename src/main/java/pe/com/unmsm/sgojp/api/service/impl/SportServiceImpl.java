@@ -43,11 +43,10 @@ public class SportServiceImpl implements SportService {
         User user = usersDao.get(code);
         List<Sport> lsSport = sportDao.getAll();
         if (user != null) {
-            List<String> lsSportId = user.getSport_ids();
+            String sportId = user.getSport_id();
             List<Sport> aux = lsSport.stream()
                     .filter((s)
-                            -> lsSportId.stream()
-                            .filter(sportId -> sportId.equals(s.getId())).count() > 0
+                            -> s.getId().equals(user.getSport_id())
                     ).collect(Collectors.toList());
             if(aux.isEmpty()){
                 return lsSport;

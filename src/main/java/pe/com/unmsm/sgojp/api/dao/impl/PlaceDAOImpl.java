@@ -22,7 +22,7 @@ import pe.com.unmsm.sgojp.api.model.Place;
  */
 public class PlaceDAOImpl implements PlaceDAO {
 
-    private final String TABLE_NAME = "users";
+    private final String TABLE_NAME = "place";
     private final MongoDatabase DATABASE = getConnection();
 
     @Override

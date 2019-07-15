@@ -22,5 +22,5 @@ public class User {
  //   private String place;
     private Date date;
     private String section;
-    private List<String> sport_ids;
+    private String sport_id;
 }

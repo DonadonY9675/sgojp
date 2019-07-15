@@ -21,9 +21,12 @@ public class OpinionServiceImpl implements OpinionService {
 
     @Override
     public boolean register(Opinion e) {
-//        List<Opinion> lsOpinion = u.getAll();
-//        
-//        e.setId(lsOpinion.stream().map(x->x.getId()).map(x->Integer.parseInt(x)).max((n1,n2)->n1.compareTo(n2)).orElse(1).toString());
+        
+        List<Opinion> lsOpinion = u.getAll();
+        Integer val = lsOpinion.stream().map(x->x.getId()).map(x->Integer.parseInt(x)).max((n1,n2)->n1.compareTo(n2)).orElse(1);
+        val++; 
+        e.setId(val.toString());
+        System.out.println("REGISTRANDO =" + e);
         return u.register(e);
     }
 
