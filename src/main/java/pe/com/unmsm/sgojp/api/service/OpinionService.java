@@ -23,4 +23,7 @@ public interface OpinionService {
     public boolean update(Opinion e);
 
     public boolean remove(String id);
+    
+    public List<Opinion> getOpinionFilterCode(String code);
+    
 }

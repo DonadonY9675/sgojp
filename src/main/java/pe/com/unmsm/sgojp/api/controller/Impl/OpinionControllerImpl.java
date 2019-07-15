@@ -9,6 +9,8 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -19,6 +21,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import pe.com.unmsm.sgojp.api.dao.impl.FactoryDAO;
 import pe.com.unmsm.sgojp.api.model.service.Opinion;
 import pe.com.unmsm.sgojp.api.service.OpinionService;
 import pe.com.unmsm.sgojp.api.service.impl.OpinionServiceImpl;
@@ -81,6 +84,14 @@ public class OpinionControllerImpl {
         }
         opinion.getLikes().put(user, value);
         return Response.ok(u.update(opinion)).build();
+
+    }
+    
+    @GET
+    @Path("/filter/code/{code}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getOpinionFilterCode(@PathParam("code") String code) {       
+        return Response.ok(u.getOpinionFilterCode(code)).build();
 
     }
     

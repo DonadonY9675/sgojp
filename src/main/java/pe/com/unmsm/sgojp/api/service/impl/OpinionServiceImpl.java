@@ -6,7 +6,9 @@
 package pe.com.unmsm.sgojp.api.service.impl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import pe.com.unmsm.sgojp.api.dao.OpinionDAO;
+import pe.com.unmsm.sgojp.api.dao.impl.FactoryDAO;
 import pe.com.unmsm.sgojp.api.dao.impl.OpinionDAOImpl;
 import pe.com.unmsm.sgojp.api.model.service.Opinion;
 import pe.com.unmsm.sgojp.api.service.OpinionService;
@@ -48,6 +50,14 @@ public class OpinionServiceImpl implements OpinionService {
     @Override
     public boolean remove(String id) {
         return u.remove(id);
+    }
+
+    @Override
+    public List<Opinion> getOpinionFilterCode(String code) {
+        String idSport = FactoryDAO.getUserDAO().get(code).getSport_id();
+        String placeId = FactoryDAO.getSportDAO().get(idSport).getPlace();
+        System.out.println("place id = " + placeId);
+        return u.getAll().stream().filter(e->e.getPlace().equals(placeId)).collect(Collectors.toList());
     }
 
 }

@@ -44,7 +44,7 @@ public class SportControllerImpl {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateOpinion(Sport s) {
-        System.out.println("UPDATE");
+        System.out.println("UPDATE" + s);
         return Response.ok(u.update(s)).build();
     }
     
