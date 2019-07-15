@@ -92,7 +92,6 @@ public class OpinionControllerImpl {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getOpinionFilterCode(@PathParam("code") String code) {       
         return Response.ok(u.getOpinionFilterCode(code)).build();
-
     }
     
 }
