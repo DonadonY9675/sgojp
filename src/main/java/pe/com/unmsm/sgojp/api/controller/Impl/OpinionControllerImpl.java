@@ -5,6 +5,8 @@ package pe.com.unmsm.sgojp.api.controller.Impl;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.HashMap;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -46,7 +48,6 @@ public class OpinionControllerImpl {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response registerOpinion(Opinion o) {
-        System.out.println("REGISTRANDO");
         return Response.status(Response.Status.CREATED).entity(u.register(o)).build();
     }
 
@@ -81,5 +82,5 @@ public class OpinionControllerImpl {
         return Response.ok(u.update(opinion)).build();
 
     }
-
+    
 }

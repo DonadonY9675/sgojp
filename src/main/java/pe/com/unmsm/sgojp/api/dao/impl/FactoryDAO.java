@@ -13,8 +13,6 @@ import pe.com.unmsm.sgojp.api.dao.*;
  */
 public class FactoryDAO {
     
-    
-    
     public static UserDAO getUserDAO(){
         return new UserDAOImpl();
     }
