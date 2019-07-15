@@ -21,5 +21,5 @@ import lombok.NoArgsConstructor;
 public class MostRatedGames {
     private String event;
     private String sport;
-    private String rating;
+    private Double rating;
 }
