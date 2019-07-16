@@ -17,6 +17,7 @@ import pe.com.unmsm.sgojp.api.dao.UserDAO;
 import pe.com.unmsm.sgojp.api.dao.impl.FactoryDAO;
 import pe.com.unmsm.sgojp.api.model.Place;
 import pe.com.unmsm.sgojp.api.model.User;
+import pe.com.unmsm.sgojp.api.model.querys.BetterQualifiedComment;
 import pe.com.unmsm.sgojp.api.model.querys.BetterQualifiedServices;
 import pe.com.unmsm.sgojp.api.model.querys.MostRatedGames;
 import pe.com.unmsm.sgojp.api.model.service.Question;
@@ -97,8 +98,36 @@ public class QuerysServiceImpl implements QuerysService {
         });
 
         return lsBetterQualifiedServices.stream()
-                .filter(e->!e.getAverageRating().equals(Double.NaN))
-                .sorted((e1,e2)->e2.getAverageRating().compareTo(e1.getAverageRating()))
+                .filter(e -> !e.getAverageRating().equals(Double.NaN))
+                .sorted((e1, e2) -> e2.getAverageRating().compareTo(e1.getAverageRating()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<BetterQualifiedComment> getBetterQualifiedComment() {
+        System.out.println("INGRESO");
+        List<Sport> lsSport = sportDao.getAll();
+        List<BetterQualifiedComment> lsMostRatedGames = new ArrayList<>();
+        lsSport.stream().forEach((sport) -> {
+            sport.getEvents().stream().forEach((event) -> {
+                event.getComments().stream().forEach(comments -> {
+                    System.out.println("ITERANDO");
+                    lsMostRatedGames.add(BetterQualifiedComment.builder()
+                            .sport(sport.getName())
+                            .event(event.getName())
+                            .comment(comments.getComment())
+                            .likes(comments.getLikes().entrySet().stream()
+                                    .filter(e->e.getValue()).count())
+                            .dislikes(comments.getLikes().entrySet().stream()
+                                    .filter(e->!e.getValue()).count())
+                            .build());
+                });
+
+            });
+        });
+
+        return lsMostRatedGames.stream()
+                .sorted((e2, e1) -> e1.getLikes().compareTo(e2.getLikes()))
                 .collect(Collectors.toList());
     }
 

@@ -39,4 +39,11 @@ public class QueryControllerImpl {
         return Response.ok(u.getBetterQualifiedServices()).build();
     }
     
+    @GET
+    @Path("/better-qualified-comment")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response getBetterQualifiedComment() {
+        return Response.ok(u.getBetterQualifiedComment()).build();
+    }
 }
