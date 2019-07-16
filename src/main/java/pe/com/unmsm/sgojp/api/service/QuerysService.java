@@ -9,6 +9,7 @@ import java.util.List;
 import pe.com.unmsm.sgojp.api.model.querys.BetterQualifiedComment;
 import pe.com.unmsm.sgojp.api.model.querys.BetterQualifiedServices;
 import pe.com.unmsm.sgojp.api.model.querys.MostRatedGames;
+import pe.com.unmsm.sgojp.api.model.querys.SportsMoreDefendants;
 
 /**
  *
@@ -18,4 +19,5 @@ public interface QuerysService {
     public List<MostRatedGames> getMostRatedGames();
     public List<BetterQualifiedServices> getBetterQualifiedServices();
     public List<BetterQualifiedComment> getBetterQualifiedComment();
+    public List<SportsMoreDefendants> getSportsMoreDefendants();
 }

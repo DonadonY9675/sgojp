@@ -20,6 +20,7 @@ import pe.com.unmsm.sgojp.api.model.User;
 import pe.com.unmsm.sgojp.api.model.querys.BetterQualifiedComment;
 import pe.com.unmsm.sgojp.api.model.querys.BetterQualifiedServices;
 import pe.com.unmsm.sgojp.api.model.querys.MostRatedGames;
+import pe.com.unmsm.sgojp.api.model.querys.SportsMoreDefendants;
 import pe.com.unmsm.sgojp.api.model.service.Question;
 import pe.com.unmsm.sgojp.api.model.sport.Event;
 import pe.com.unmsm.sgojp.api.model.sport.Sport;
@@ -31,12 +32,12 @@ import pe.com.unmsm.sgojp.api.service.QuerysService;
  * @author
  */
 public class QuerysServiceImpl implements QuerysService {
-
+    
     private final SportDAO sportDao = FactoryDAO.getSportDAO();
     private final QuestionDAO questionDao = FactoryDAO.getQuestionDAO();
     private final PlaceDAO placeService = FactoryDAO.getPlaceDAO();
     private final UserDAO userDao = FactoryDAO.getUserDAO();
-
+    
     @Override
     public List<MostRatedGames> getMostRatedGames() {
         List<Sport> lsSport = sportDao.getAll();
@@ -53,19 +54,19 @@ public class QuerysServiceImpl implements QuerysService {
                         .build());
             });
         });
-
+        
         return lsMostRatedGames.stream()
                 .sorted((e2, e1) -> e1.getRating().compareTo(e2.getRating()))
                 .collect(Collectors.toList());
     }
-
+    
     @Override
     public List<BetterQualifiedServices> getBetterQualifiedServices() {
         List<Place> lsPlace = placeService.getAll();
         List<Question> lsQuestion = questionDao.getAll();
         List<Sport> lsSport = sportDao.getAll();
         List<User> lsUser = userDao.getAll();
-
+        
         List<BetterQualifiedServices> lsBetterQualifiedServices = new ArrayList<>();
         System.out.println("INGRESO");
         lsQuestion.stream().forEach(q -> {
@@ -81,7 +82,7 @@ public class QuerysServiceImpl implements QuerysService {
                                             .findAny()
                                             .get()
                                             .getSport_id();
-
+                                    
                                     return lsSport.stream()
                                             .filter(e -> e.getId().equals(sport_id))
                                             .findAny()
@@ -96,13 +97,13 @@ public class QuerysServiceImpl implements QuerysService {
                 System.out.println("Agregando");
             });
         });
-
+        
         return lsBetterQualifiedServices.stream()
                 .filter(e -> !e.getAverageRating().equals(Double.NaN))
                 .sorted((e1, e2) -> e2.getAverageRating().compareTo(e1.getAverageRating()))
                 .collect(Collectors.toList());
     }
-
+    
     @Override
     public List<BetterQualifiedComment> getBetterQualifiedComment() {
         System.out.println("INGRESO");
@@ -117,18 +118,51 @@ public class QuerysServiceImpl implements QuerysService {
                             .event(event.getName())
                             .comment(comments.getComment())
                             .likes(comments.getLikes().entrySet().stream()
-                                    .filter(e->e.getValue()).count())
+                                    .filter(e -> e.getValue()).count())
                             .dislikes(comments.getLikes().entrySet().stream()
-                                    .filter(e->!e.getValue()).count())
+                                    .filter(e -> !e.getValue()).count())
                             .build());
                 });
-
+                
             });
         });
-
+        
         return lsMostRatedGames.stream()
                 .sorted((e2, e1) -> e1.getLikes().compareTo(e2.getLikes()))
                 .collect(Collectors.toList());
     }
-
+    
+    @Override
+    public List<SportsMoreDefendants> getSportsMoreDefendants() {
+        List<SportsMoreDefendants> ls = new ArrayList<>();
+        List<User> lsUser = userDao.getAll();
+        List<Sport> lsSport = sportDao.getAll();
+        
+        lsSport.stream()
+                .forEach(e -> {
+                    ls.add(SportsMoreDefendants.builder()
+                            .sport(e.getName())
+                            .cant(lsUser.stream()
+                                    .filter(s -> s.getSport_id().equals(e.getId()))
+                                    .count())
+                            .build());
+                });
+        
+        List<SportsMoreDefendants> aux = ls.stream()
+                .sorted((d1, d2) -> d2.getCant().compareTo(d1.getCant()))
+                .collect(Collectors.toList());
+        List<SportsMoreDefendants> retornar = new ArrayList<>();
+        long cant = 0;
+        for (int i = 0; i < ls.size(); i++) {
+            if (i < 5) {
+                retornar.add(aux.get(i));
+            }
+            cant += aux.get(i).getCant();
+        }
+        retornar.add(SportsMoreDefendants.builder()
+                .sport("Otros")
+                .cant(cant).build());
+        return retornar;
+    }
+    
 }

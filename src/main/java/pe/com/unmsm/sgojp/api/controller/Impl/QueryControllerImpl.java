@@ -46,4 +46,12 @@ public class QueryControllerImpl {
     public Response getBetterQualifiedComment() {
         return Response.ok(u.getBetterQualifiedComment()).build();
     }
+    
+    @GET
+    @Path("/sports-more-defendants")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response getSportsMoreDefendants() {
+        return Response.ok(u.getSportsMoreDefendants()).build();
+    }
 }
