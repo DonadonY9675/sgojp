@@ -142,14 +142,14 @@ public class QuerysServiceImpl implements QuerysService {
                 .forEach(e -> {
                     ls.add(SportsMoreDefendants.builder()
                             .sport(e.getName())
-                            .cant(lsUser.stream()
+                            .quantity(lsUser.stream()
                                     .filter(s -> s.getSport_id().equals(e.getId()))
                                     .count())
                             .build());
                 });
         
         List<SportsMoreDefendants> aux = ls.stream()
-                .sorted((d1, d2) -> d2.getCant().compareTo(d1.getCant()))
+                .sorted((d1, d2) -> d2.getQuantity().compareTo(d1.getQuantity()))
                 .collect(Collectors.toList());
         List<SportsMoreDefendants> retornar = new ArrayList<>();
         long cant = 0;
@@ -157,11 +157,11 @@ public class QuerysServiceImpl implements QuerysService {
             if (i < 5) {
                 retornar.add(aux.get(i));
             }
-            cant += aux.get(i).getCant();
+            cant += aux.get(i).getQuantity();
         }
         retornar.add(SportsMoreDefendants.builder()
                 .sport("Otros")
-                .cant(cant).build());
+                .quantity(cant).build());
         return retornar;
     }
     

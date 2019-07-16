@@ -20,5 +20,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class SportsMoreDefendants {
     private String sport;
-    private Long cant;
+    private Long quantity;
 }
