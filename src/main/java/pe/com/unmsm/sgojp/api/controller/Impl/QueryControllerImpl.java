@@ -31,6 +31,12 @@ public class QueryControllerImpl {
         return Response.ok(u.getMostRatedGames()).build();
     }
 
-    
+    @GET
+    @Path("/better-qualified-services")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response getBetterQualifiedServices() {
+        return Response.ok(u.getBetterQualifiedServices()).build();
+    }
     
 }

@@ -7,6 +7,7 @@ package pe.com.unmsm.sgojp.api.service.impl;
 
 import java.util.List;
 import pe.com.unmsm.sgojp.api.dao.PlaceDAO;
+import pe.com.unmsm.sgojp.api.dao.impl.FactoryDAO;
 import pe.com.unmsm.sgojp.api.dao.impl.PlaceDAOImpl;
 import pe.com.unmsm.sgojp.api.model.Place;
 import pe.com.unmsm.sgojp.api.service.PlaceService;
@@ -27,6 +28,13 @@ public class PlaceServiceImpl implements PlaceService {
     @Override
     public List<Place> getAll() {
         return u.getAll();
+    }
+
+    @Override
+    public Place getFilterByCode(String code) {
+        String idSport = FactoryDAO.getUserDAO().get(code).getSport_id();
+        String placeId = FactoryDAO.getSportDAO().get(idSport).getPlace();
+        return u.get(placeId);
     }
 
 }

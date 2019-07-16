@@ -44,8 +44,6 @@ public class PlaceControllerImpl {
     @Path("/filter/code/{code}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getFilterCode(@PathParam("code") String code) {
-        String idSport = FactoryDAO.getUserDAO().get(code).getSport_id();
-        String placeId = FactoryDAO.getSportDAO().get(idSport).getPlace();
-        return Response.ok(u.get(placeId)).build();
+        return Response.ok(u.getFilterByCode(code)).build();
     }
 }

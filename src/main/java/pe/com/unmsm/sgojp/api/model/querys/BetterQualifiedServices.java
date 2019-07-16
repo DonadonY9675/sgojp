@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pe.com.unmsm.sgojp.api.model.service;
+package pe.com.unmsm.sgojp.api.model.querys;
 
-import java.util.List;
-import java.util.Map;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,13 +15,12 @@ import lombok.NoArgsConstructor;
  * @author Miguel
  */
 @Data
+@Builder
 @NoArgsConstructor
-public class Question {
-
-    private String id;
+@AllArgsConstructor
+public class BetterQualifiedServices {
     private String name;
     private String question;
-    private List<String> place;
-    private Map<String, Integer> ratings;
-    private Integer value;
+    private String place;
+    private Double averageRating;
 }

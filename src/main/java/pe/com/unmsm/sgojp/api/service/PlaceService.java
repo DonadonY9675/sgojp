@@ -15,5 +15,5 @@ import pe.com.unmsm.sgojp.api.model.Place;
 public interface PlaceService {
     public Place get(String id);
     public List<Place> getAll();
-
+    public Place getFilterByCode(String code);
 }

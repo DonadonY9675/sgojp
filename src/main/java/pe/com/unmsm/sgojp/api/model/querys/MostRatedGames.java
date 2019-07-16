@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MostRatedGames {
-    private String event;
     private String sport;
+    private String event;
     private Double rating;
 }

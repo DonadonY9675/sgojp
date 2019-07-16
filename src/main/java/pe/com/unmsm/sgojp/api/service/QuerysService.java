@@ -6,6 +6,7 @@
 package pe.com.unmsm.sgojp.api.service;
 
 import java.util.List;
+import pe.com.unmsm.sgojp.api.model.querys.BetterQualifiedServices;
 import pe.com.unmsm.sgojp.api.model.querys.MostRatedGames;
 
 /**
@@ -14,4 +15,5 @@ import pe.com.unmsm.sgojp.api.model.querys.MostRatedGames;
  */
 public interface QuerysService {
     public List<MostRatedGames> getMostRatedGames();
+    public List<BetterQualifiedServices> getBetterQualifiedServices();
 }
